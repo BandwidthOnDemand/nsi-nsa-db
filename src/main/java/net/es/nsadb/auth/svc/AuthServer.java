@@ -16,13 +16,10 @@ public class AuthServer {
 
     private static AuthServer instance;
 
-    public static AuthServer getInstance(String url, String configFile) throws Exception {
-        if (instance == null) {
-            instance = new AuthServer(url, configFile);
-        }
+    public static AuthServer getInstance(){
         return instance;
     }
-    public static AuthServer getInstance(HttpConfig conf) throws Exception {
+    public static AuthServer makeServer(HttpConfig conf) throws Exception {
         if (instance == null) {
             instance = new AuthServer(conf.url, conf.bus);
         }
