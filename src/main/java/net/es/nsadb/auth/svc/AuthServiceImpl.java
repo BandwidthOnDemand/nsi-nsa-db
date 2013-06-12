@@ -1,15 +1,11 @@
 package net.es.nsadb.auth.svc;
 
 import net.es.nsadb.PersistenceHolder;
-import net.es.nsadb.auth.beans.AuthMethod;
 import net.es.nsadb.auth.beans.AuthRecord;
 import net.es.nsadb.auth.beans.CredentialRecord;
-import net.es.nsadb.auth.beans.CredentialType;
 import net.es.nsadb.auth.svc.api.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -27,6 +23,7 @@ public class AuthServiceImpl implements AuthProviderService {
 
             } else {
                 System.out.println("could not locate old record with id "+ incoming.getId());
+                em.getTransaction().commit();
                 Response r = Response.serverError().build();
                 return r;
             }
@@ -78,21 +75,33 @@ public class AuthServiceImpl implements AuthProviderService {
     }
 
     public AuthRecord byId(Long id) {
-        AuthRecord ar = new AuthRecord();
-        ar.setId(1L);
-        ar.setMethod(AuthMethod.BASIC);
-        ar.setNetworkId("foo");
-        CredentialRecord cred = new CredentialRecord();
-        cred.setId(2L);
-        cred.setType(CredentialType.TOKEN);
-        cred.setCredential("1231231");
-        ar.getCredentialRecordSet().add(cred);
         System.out.println("----byId "+id);
+
+        EntityManager em = PersistenceHolder.getInstance().getEntityManager();
+        em.getTransaction().begin();
+        AuthRecord ar = em.find(AuthRecord.class, id);
+        em.getTransaction().commit();
+
         return ar;
     }
 
-    public AuthRecord byNetwork(String network) {
-        System.out.println("----byNetwork "+network);
-        return null;
+    public ListResponse byNetwork(ByNetworkRequest request) {
+        String networkId = request.getNetworkId();
+        System.out.println("----byNetwork "+networkId);
+        ListResponse resp = new ListResponse();
+
+        EntityManager em = PersistenceHolder.getInstance().getEntityManager();
+        em.getTransaction().begin();
+        List<AuthRecord> recordList = em.createQuery("SELECT c FROM AuthRecord c WHERE c.networkId = '"+networkId+"'", AuthRecord.class).getResultList();
+        for (AuthRecord ar :recordList) {
+            for (CredentialRecord cr : ar.getCredentialRecordSet()) {
+                cr.getCredential();
+            }
+        }
+        em.getTransaction().commit();
+        resp.setAuthRecords(recordList);
+
+        return resp;
+
     }
 }

@@ -23,7 +23,7 @@ public interface AuthProviderService {
 
     @GET
     @Path("/delete/{id : \\d+}")
-    Response delete(Long id);
+    Response delete(@PathParam("id") Long id);
 
     @POST
     @Path("/update")
@@ -35,7 +35,7 @@ public interface AuthProviderService {
     @Path("/byNetwork")
     @Produces( "application/json" )
     @Consumes( "application/json" )
-    AuthRecord byNetwork(@PathParam("networkId") String networkId);
+    ListResponse byNetwork(ByNetworkRequest request);
 
 
 }

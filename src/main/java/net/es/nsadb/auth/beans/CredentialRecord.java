@@ -30,6 +30,7 @@ public class CredentialRecord {
 
 
     @XmlElement(name = "type")
+    @Enumerated(EnumType.STRING)
     public CredentialType getType() {
         return type;
     }
