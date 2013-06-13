@@ -1,25 +1,20 @@
-package net.es.nsadb.auth.svc.api;
+package net.es.nsadb.nsa.svc.api;
 
-
-
-import net.es.nsadb.auth.beans.AuthRecord;
+import net.es.nsadb.nsa.beans.NsaRecord;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("/")
-
-public interface AuthProviderService {
+public interface NsaProviderService {
     @GET
     @Path("/list")
     @Produces( "application/json" )
-    AuthListResponse list();
-
+    NsaListResponse list();
 
     @GET
     @Path("/id/{id : \\d+}")
     @Produces( "application/json" )
-    AuthRecord byId(@PathParam("id") Long id);
+    NsaRecord byId(@PathParam("id") Long id);
 
     @GET
     @Path("/delete/{id : \\d+}")
@@ -29,13 +24,12 @@ public interface AuthProviderService {
     @Path("/update")
     @Produces( "application/json" )
     @Consumes( "application/json" )
-    Response update(AuthRecord obj);
+    Response update(NsaRecord obj);
 
     @POST
     @Path("/byFilter")
     @Produces( "application/json" )
     @Consumes( "application/json" )
-    AuthListResponse byFilter(AuthByFilterRequest request);
-
+    NsaListResponse byFilter(NsaByFilterRequest request);
 
 }

@@ -57,8 +57,8 @@ public class AuthServiceImpl implements AuthProviderService {
         return r;
     }
 
-    public ListResponse list() {
-        ListResponse resp = new ListResponse();
+    public AuthListResponse list() {
+        AuthListResponse resp = new AuthListResponse();
         EntityManager em = PersistenceHolder.getInstance().getEntityManager();
         em.getTransaction().begin();
         List<AuthRecord> recordList = em.createQuery("select c from AuthRecord c", AuthRecord.class).getResultList();
@@ -85,14 +85,15 @@ public class AuthServiceImpl implements AuthProviderService {
         return ar;
     }
 
-    public ListResponse byNetwork(ByNetworkRequest request) {
+    public AuthListResponse byFilter(AuthByFilterRequest request) {
         String networkId = request.getNetworkId();
-        System.out.println("----byNetwork "+networkId);
-        ListResponse resp = new ListResponse();
+        System.out.println("----byFilter "+networkId);
+        AuthListResponse resp = new AuthListResponse();
 
         EntityManager em = PersistenceHolder.getInstance().getEntityManager();
         em.getTransaction().begin();
-        List<AuthRecord> recordList = em.createQuery("SELECT c FROM AuthRecord c WHERE c.networkId = '"+networkId+"'", AuthRecord.class).getResultList();
+        String query = "SELECT c FROM AuthRecord c WHERE c.networkId = '"+networkId+"'";
+        List<AuthRecord> recordList = em.createQuery(query, AuthRecord.class).getResultList();
         for (AuthRecord ar :recordList) {
             for (CredentialRecord cr : ar.getCredentialRecordSet()) {
                 cr.getCredential();

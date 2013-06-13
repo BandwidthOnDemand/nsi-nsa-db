@@ -4,8 +4,8 @@ package net.es.nsadb.auth.svc.api;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "byNetworkRequest")
-public class ByNetworkRequest {
+@XmlRootElement(name = "authByFilterRequest")
+public class AuthByFilterRequest {
     private String networkId;
 
     @XmlElement(name = "networkId")

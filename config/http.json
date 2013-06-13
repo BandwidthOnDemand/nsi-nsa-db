@@ -2,6 +2,10 @@
     "auth": {
         "url": "http://localhost:8402/",
         "bus": "config/jetty.xml"
+    },
+    "nsa": {
+        "url": "http://localhost:8403/",
+        "bus": "config/jetty.xml"
     }
 
 }

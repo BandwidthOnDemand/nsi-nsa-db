@@ -7,7 +7,10 @@
         <class>net.es.nsadb.auth.beans.AuthRecord</class>
         <class>net.es.nsadb.auth.beans.CredentialRecord</class>
         <class>net.es.nsadb.auth.beans.CredentialType</class>
-        <class>net.es.nsadb.auth.beans.AuthMethod</class>        <properties>
+        <class>net.es.nsadb.auth.beans.AuthMethod</class>
+        <class>net.es.nsadb.nsa.beans.NsaRecord</class>
+
+        <properties>
             <property name="hibernate.ejb.cfgfile" value="hibernate.xml"/>
         </properties>
     </persistence-unit>

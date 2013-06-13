@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlRootElement(name = "listResponse")
-public class ListResponse {
+@XmlRootElement(name = "authListResponse")
+public class AuthListResponse {
 
     private List<AuthRecord> authRecords;
 

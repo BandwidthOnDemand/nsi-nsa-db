@@ -5,6 +5,7 @@ import net.es.nsadb.auth.svc.AuthServer;
 import net.es.nsadb.config.SpringContext;
 import net.es.nsadb.config.http.HttpConfig;
 import net.es.nsadb.config.http.HttpConfigProvider;
+import net.es.nsadb.nsa.svc.NsaServer;
 import org.springframework.context.ApplicationContext;
 
 public class Invoker {
@@ -28,9 +29,11 @@ public class Invoker {
         System.out.print(" Spring initialized. \nLoading HTTP config... ");
         HttpConfigProvider htProv = (HttpConfigProvider) context.getBean("httpConfigProvider");
         HttpConfig aaConf = htProv.getConfig("auth");
+        HttpConfig nsaConf = htProv.getConfig("nsa");
 
         System.out.print("done. \nStarting HTTP servers...\n");
         AuthServer.makeServer(aaConf);
+        NsaServer.makeServer(nsaConf);
         System.out.println("HTTP servers started.");
 
         Runtime.getRuntime().addShutdownHook(
@@ -39,6 +42,7 @@ public class Invoker {
                         System.out.println("Shutting down..");
                         PersistenceHolder.getInstance().getEntityManager().close();
                         AuthServer.getInstance().stop();
+                        NsaServer.getInstance().stop();
                         System.out.println("Shutdown complete.");
                         Invoker.setKeepRunning(false);
                     }
