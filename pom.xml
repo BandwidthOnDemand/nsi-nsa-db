@@ -21,6 +21,12 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <scm>
+        <connection>scm:git:git@github.com:BandwidthOnDemand/nsi-nsa-db.git</connection>
+        <developerConnection>scm:git:git@github.com:BandwidthOnDemand/nsi-nsa-db.git</developerConnection>
+        <url>https://github.com/BandwidthOnDemand/nsi-nsa-db</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <!-- persistence -->
@@ -138,4 +144,18 @@
         </plugins>
 
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>surfnet-public-releases</id>
+            <name>surfnet-public-releases</name>
+            <url>http://atlas.dlp.surfnet.nl/nexus/content/repositories/public-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>surfnet-public-snapshots</id>
+            <name>surfnet-snapshots</name>
+            <url>http://atlas.dlp.surfnet.nl/nexus/content/repositories/public-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
