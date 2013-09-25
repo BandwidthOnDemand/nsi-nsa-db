@@ -4,7 +4,7 @@
 
     <groupId>net.es.nsi</groupId>
     <artifactId>nsi-nsa-db</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -23,7 +23,7 @@
         <connection>scm:git:git@github.com:BandwidthOnDemand/nsi-nsa-db.git</connection>
         <developerConnection>scm:git:git@github.com:BandwidthOnDemand/nsi-nsa-db.git</developerConnection>
         <url>https://github.com/BandwidthOnDemand/nsi-nsa-db</url>
-        <tag>nsi-nsa-db-1.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
